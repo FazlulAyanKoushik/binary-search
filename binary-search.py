@@ -1,41 +1,31 @@
+from turtle import right
 from xmlrpc.client import Boolean
 
+count = 0
+
+def binarySearch(list, target, left, right):
+    global count
+    count = count + 1
+    if left <= right:
+        mid = (left+right)//2
+        print(f'Middle number is {list[mid]} ')
+    
+    if target == list[mid]:
+        print(f'The Target number ({target}) is found is index number {mid} and loop count {count}')
+    
+    if target > list[mid]:
+        binarySearch(list, target, mid+1, right)
+    
+    if target < list[mid]:
+        binarySearch(list, target, left, mid-1)
+        
 numbers = [2,12,14,6,45,3,4,9,23]
-have = Boolean
 sorted_numbers = sorted(numbers)
-find = 9
-
-middle_len = int(len(numbers)/2)
-print('middle number',sorted_numbers[middle_len])
-
-print(middle_len)
-print(sorted_numbers)
-
-if sorted_numbers[middle_len] == find:
-    have = True;
-    print('Number was in middle')
-
-if sorted_numbers[middle_len] > find:
-    print('in smaller')
-    for value in range(middle_len, 0, -1):
-        print(value)
-        if sorted_numbers[value] == find:
-            have = True
-            print('Number was smaller than middle')
-            break
-
-if sorted_numbers[middle_len] < find:
-    print('in Greater')
-    for value in range(middle_len, len(sorted_numbers), 1):
-        print(value)
-        if sorted_numbers[value] == find:
-            have = True
-            print('Number was greater than middle')
-            break
-if have == True:
-    print(find, ' < this number have in numbers list')
-else:
-    print(find, ' < Cant find this number')
+print(f'Sorted numbers are {sorted_numbers} ')
+left = 0
+right = len(sorted_numbers)-1
+target = 12
+binarySearch(sorted_numbers, target, left, right)
 
         
 
